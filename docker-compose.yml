@@ -1,0 +1,25 @@
+
+version: '3'
+
+services: 
+  docker-mysql:
+    image: mysql:8.0.11
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootpassword
+      - MYSQL_DATABASE=test1
+      - MYSQL_USER=deepti
+      - MYSQL_PASSWORD=lalwani
+    
+  spring-boot-jpa-docker-webapp:
+    image: deepti/spring-boot-docker
+    depends_on:
+      - docker-mysql
+    ports:
+      - 8080:8080
+    environment:
+      - DATABASE_HOST=docker-mysql
+      - DATABASE_USER=deepti
+      - DATABASE_PASSWORD=lalwani
+      - DATABASE_NAME=test1 
+      - DATABASE_PORT=3306
+     
